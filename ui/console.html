@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VALKYRIE // LEDGERWERK-77 — Neural Exception Matrix</title>
+<style>
+/* ═════════════════════════════════════════════════════════════════════════
+   VALKYRIE // AP-77 · TACTICAL ACCOUNTS PAYABLE SURVEILLANCE MATRIX
+   Aesthetics: Cold-War / Cyber-Industrial / Hardware Terminal
+   Palette: Milled Gunmetal / Phosphor Amber / Uranium Green / Warning Crimson
+   ═════════════════════════════════════════════════════════════════════════ */
+:root {
+  --bg-hull: #101214;
+  --metal-0: #1b1e22;
+  --metal-1: #242930;
+  --metal-2: #323842;
+  --metal-3: #434b57;
+  --metal-edge: #5a6475;
+  --metal-hi: #8c98ad;
+  --screw: #14171a;
+  --screw-slot: #3a424e;
+  
+  --amber: #ffaa1d;
+  --amber-dim: #96610b;
+  --amber-hot: #ffe394;
+  --amber-glow: rgba(255, 170, 29, 0.4);
+
+  --green: #29e083;
+  --green-dim: #13693d;
+  --green-glow: rgba(41, 224, 131, 0.4);
+
+  --crimson: #ff3344;
+  --crimson-dim: #80121c;
+  --crimson-glow: rgba(255, 51, 68, 0.45);
+
+  --cyan: #19d2ff;
+  --cyan-dim: #095a70;
+  
+  --crt-bg: #090c0a;
+  --crt-amber: #ffb833;
+  --crt-green: #33ff88;
+
+  --paper-bg: #f5f2e8;
+  --paper-line: #d8d3c1;
+  --paper-ink: #1f201d;
+
+  --font-mono: "SF Mono", "Consolas", "Courier New", monospace;
+  --font-display: "Lucida Console", "Consolas", monospace;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html, body {
+  background: var(--bg-hull);
+  color: #c9d2de;
+  font-family: var(--font-mono);
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+/* Background brushed texture + rivet grid */
+body::before {
+  content: "";
+  position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(25, 210, 255, 0.04), transparent 60%),
+    linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(0deg, rgba(255,255,255,0.015) 1px, transparent 1px) 0 0 / 32px 32px,
+    linear-gradient(180deg, #121418 0%, #0d0f11 100%);
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  max-width: 1540px;
+  margin: 0 auto;
+  padding: 16px 18px 80px;
+}
+
+/* ── HEAVY CHASSIS BEZELS & PLATES ─────────────────────────────────── */
+.chassis {
+  background: linear-gradient(180deg, #2a3038 0%, #1d2127 45%, #15181c 100%);
+  border: 2px solid #3c4450;
+  border-top-color: #555f6f;
+  border-radius: 8px;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    inset 0 -3px 6px rgba(0,0,0,0.8),
+    0 12px 32px rgba(0,0,0,0.7);
+  position: relative;
+}
+
+/* Hardware Torx Rivet corners */
+.chassis::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 4px 4px, #4e5765 2px, #16181b 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 4px) 4px, #4e5765 2px, #16181b 3px, transparent 3.5px),
+    radial-gradient(circle at 4px calc(100% - 4px), #4e5765 2px, #16181b 3px, transparent 3.5px),
+    radial-gradient(circle at calc(100% - 4px) calc(100% - 4px), #4e5765 2px, #16181b 3px, transparent 3.5px);
+  opacity: 0.8;
+}
+
+.hazard-strip {
+  height: 6px;
+  background: repeating-linear-gradient(-45deg, #1a1a1a 0 10px, #e5a00d 10px 20px);
+  border-bottom: 1px solid #000;
+  border-radius: 6px 6px 0 0;
+}
+
+/* ── STAMPED ENGRAVED PLATES ───────────────────────────────────────── */
+.plate {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9cb0c7;
+  background: linear-gradient(180deg, #2a313b, #1b2027);
+  border: 1px solid #414b59;
+  border-radius: 3px;
+  padding: 3px 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 0 2px 4px rgba(0,0,0,0.5);
+}
+.plate.hot { color: var(--amber); border-color: var(--amber-dim); }
+.plate.alert { color: var(--crimson); border-color: var(--crimson-dim); }
+.plate.active { color: var(--green); border-color: var(--green-dim); }
+
+/* ── MAST / TOP DECK ───────────────────────────────────────────────── */
+header.mast {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 18px;
+  margin-bottom: 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.brand-mark {
+  width: 44px; height: 44px;
+  background: #14181d;
+  border: 2px solid var(--metal-edge);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.8);
+}
+.brand-text h1 {
+  font-size: 21px;
+  letter-spacing: 0.28em;
+  font-weight: 900;
+  color: #e6edf5;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8), 0 0 16px rgba(25,210,255,0.25);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  color: #7b889b;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.top-telemetry {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ── LED LAMPS ─────────────────────────────────────────────────────── */
+.lamp {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #1c2128;
+  border: 1px solid #36404d;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);
+  display: inline-block;
+  transition: all 0.2s ease;
+}
+.lamp.green {
+  background: radial-gradient(circle at 35% 30%, #b2ffce, var(--green));
+  border-color: #55f09e;
+  box-shadow: 0 0 10px var(--green), inset 0 1px 1px #fff;
+}
+.lamp.amber {
+  background: radial-gradient(circle at 35% 30%, #fff2b8, var(--amber));
+  border-color: #ffc459;
+  box-shadow: 0 0 10px var(--amber), inset 0 1px 1px #fff;
+}
+.lamp.red {
+  background: radial-gradient(circle at 35% 30%, #ffabb1, var(--crimson));
+  border-color: #ff6675;
+  box-shadow: 0 0 12px var(--crimson), inset 0 1px 1px #fff;
+  animation: lamp-pulse 0.9s infinite alternate;
+}
+@keyframes lamp-pulse {
+  from { opacity: 0.4; } to { opacity: 1; }
+}
+
+/* ── FLIP-DIGIT MECHANICAL DISPLAY ─────────────────────────────────── */
+.counter-bank {
+  display: flex;
+  gap: 4px;
+  background: #0d0f12;
+  border: 2px solid #2e353f;
+  border-radius: 4px;
+  padding: 4px 6px;
+  box-shadow: inset 0 3px 8px rgba(0,0,0,0.8);
+}
+.counter-bank .digit {
+  background: linear-gradient(180deg, #1b2027 48%, #0d0f12 52%);
+  color: #ffcc55;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: var(--font-display);
+  padding: 2px 5px;
+  border-radius: 2px;
+  border: 1px solid #333c48;
+  text-shadow: 0 0 8px rgba(255, 204, 85, 0.6);
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ── TACTILE HARDWARE SWITCHES & ROCKERS ────────────────────────────── */
+.rocker {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #e2eaf4;
+  cursor: pointer;
+  padding: 9px 16px;
+  background: linear-gradient(180deg, #3a424e 0%, #252b34 60%, #1c2128 100%);
+  border: 2px solid #485465;
+  border-radius: 5px;
+  box-shadow: 0 4px 0 #111418, inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.06s, box-shadow 0.06s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.rocker:hover {
+  background: linear-gradient(180deg, #444e5d 0%, #2c333e 60%, #20262e 100%);
+  color: #fff;
+}
+.rocker:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #111418, inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.rocker:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 2px 0 #111418;
+}
+.rocker.prime {
+  background: linear-gradient(180deg, #ffc14d 0%, #cc8100 65%, #945c00 100%);
+  border-color: #ffda85;
+  color: #120a00;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 4px 0 #4f3200, 0 0 14px var(--amber-glow);
+}
+.rocker.prime:hover {
+  background: linear-gradient(180deg, #ffd073 0%, #e09100 65%, #a86900 100%);
+}
+.rocker.danger {
+  background: linear-gradient(180deg, #ff5767 0%, #c41829 65%, #7a0c16 100%);
+  border-color: #ff919b;
+  color: #fff;
+  box-shadow: 0 4px 0 #3d050a, 0 0 14px var(--crimson-glow);
+}
+.rocker.special {
+  background: linear-gradient(180deg, #33f098 0%, #159c57 65%, #0d6e3c 100%);
+  border-color: #85ffc2;
+  color: #032110;
+  box-shadow: 0 4px 0 #05331a, 0 0 14px var(--green-glow);
+}
+
+/* ── GRID SYSTEM ───────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(12, 1fr);
+}
+.col-3 { grid-column: span 3; }
+.col-4 { grid-column: span 4; }
+.col-5 { grid-column: span 5; }
+.col-6 { grid-column: span 6; }
+.col-7 { grid-column: span 7; }
+.col-8 { grid-column: span 8; }
+.col-9 { grid-column: span 9; }
+.col-12 { grid-column: span 12; }
+@media (max-width: 1200px) {
+  .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9 { grid-column: span 12; }
+}
+
+/* ── ANALOG GALVANOMETER GAUGES ────────────────────────────────────── */
+.gauge-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 6px;
+  position: relative;
+}
+.gauge-svg {
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+}
+.needle {
+  transform-origin: 100px 96px;
+  transition: transform 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.gauge-glass {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50% 50% 12px 12px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 45%);
+  pointer-events: none;
+}
+
+/* ── CRT TELETYPE TERMINAL ─────────────────────────────────────────── */
+.crt-frame {
+  background: #090c0f;
+  border: 4px solid #1a1e24;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 40px rgba(0,0,0,0.95),
+    0 0 0 1px #3a424e,
+    0 6px 16px rgba(0,0,0,0.7);
+}
+/* Scanlines + phosphor glow */
+.crt-frame::before {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none; z-index: 4;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.22) 0 1px, transparent 1px 3px);
+}
+/* Vignette */
+.crt-frame::after {
+  content: "";
+  position: absolute; inset: 0; pointer-events: none; z-index: 5;
+  background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.75) 100%);
+  box-shadow: inset 0 0 30px rgba(255, 170, 29, 0.08);
+}
+.crt-screen {
+  padding: 14px 16px;
+  height: 280px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--crt-amber);
+  text-shadow: 0 0 6px rgba(255, 170, 29, 0.45);
+  position: relative;
+  z-index: 2;
+}
+.crt-screen::-webkit-scrollbar { width: 6px; }
+.crt-screen::-webkit-scrollbar-thumb { background: #3b280b; border-radius: 3px; }
+.crt-line { white-space: pre-wrap; word-break: break-word; }
+.crt-dim { color: #885c18; text-shadow: none; }
+.crt-ok { color: var(--green); text-shadow: 0 0 6px var(--green-glow); }
+.crt-bad { color: var(--crimson); text-shadow: 0 0 8px var(--crimson-glow); font-weight: bold; }
+.crt-hot { color: var(--amber-hot); font-weight: bold; }
+.crt-cyan { color: var(--cyan); text-shadow: 0 0 6px rgba(25,210,255,0.4); }
+
+@keyframes cursor-blink { 50% { opacity: 0; } }
+.cursor { animation: cursor-blink 0.9s infinite steps(1); display: inline-block; }
+
+/* ── VECTOR RADAR / MEMORY SONAR HUD ───────────────────────────────── */
+.radar-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px;
+  gap: 12px;
+}
+.radar-bezel {
+  width: 230px; height: 230px;
+  background: #080d09;
+  border: 4px solid #232a25;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 45px rgba(0,0,0,0.95),
+    0 0 0 2px #3c4b3f,
+    0 8px 24px rgba(0,0,0,0.8);
+}
+#radar-canvas {
+  width: 100%; height: 100%;
+  display: block;
+}
+
+/* ── TICKER ────────────────────────────────────────────────────────── */
+.ticker-chassis {
+  background: #090c0f;
+  border: 2px solid #2d3540;
+  border-radius: 4px;
+  padding: 6px 12px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.8);
+}
+.ticker-belt {
+  white-space: nowrap;
+  display: inline-block;
+  padding-left: 100%;
+  animation: ticker-slide 34s linear infinite;
+  color: var(--amber);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-shadow: 0 0 6px var(--amber-glow);
+}
+@keyframes ticker-slide {
+  to { transform: translateX(-100%); }
+}
+
+/* ── EXCEPTION LEDGER TABLE ────────────────────────────────────────── */
+.ledger-wrap {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ledger-row {
+  display: grid;
+  grid-template-columns: 24px 110px 180px 1fr 140px 150px 170px;
+  gap: 12px;
+  align-items: center;
+  background: linear-gradient(180deg, #222730, #181c22);
+  border: 1px solid #36404e;
+  border-left: 6px solid var(--amber);
+  border-radius: 5px;
+  padding: 10px 14px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+}
+.ledger-row:hover {
+  background: linear-gradient(180deg, #2b323e, #20252d);
+  transform: translateX(3px);
+  border-color: #4f5d72;
+}
+.ledger-row.sev-high { border-left-color: var(--crimson); }
+.ledger-row.sev-med { border-left-color: var(--amber); }
+.ledger-row.sev-low { border-left-color: var(--green); }
+
+.pill {
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 12px;
+  border: 1px solid;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  justify-content: center;
+}
+.pill.p-approved { color: #43ff9e; border-color: #279e5d; background: rgba(39, 158, 93, 0.15); }
+.pill.p-adjust { color: #ffbe4d; border-color: #b37a1b; background: rgba(179, 122, 27, 0.18); }
+.pill.p-escalate { color: #ff5c6c; border-color: #b82735; background: rgba(184, 39, 53, 0.22); animation: lamp-pulse 1s infinite alternate; }
+.pill.p-reject { color: #ff8591; border-color: #8c1a24; background: rgba(140, 26, 36, 0.25); }
+.pill.p-pending { color: #8fa0b5; border-color: #4a5768; background: rgba(74, 87, 104, 0.2); }
+
+/* ── PUNCH CARDS (VENDORS) ─────────────────────────────────────────── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 12px;
+  padding: 14px;
+}
+.punchcard {
+  background: linear-gradient(180deg, #252b34 0%, #1a1e24 100%);
+  border: 1px solid #3a4452;
+  border-radius: 6px;
+  padding: 12px 14px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.08);
+  transition: transform 0.15s, border-color 0.15s;
+}
+.punchcard:hover {
+  transform: translateY(-2px);
+  border-color: #55647a;
+}
+.punchcard::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 8px;
+  border-bottom: 1px dashed #3a4554;
+}
+.punchcard .holes {
+  display: flex; gap: 4px; margin: 10px 0 10px;
+}
+.punchcard .hole {
+  width: 6px; height: 10px; border-radius: 2px;
+  background: #0d1013;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.9), 0 1px 0 rgba(255,255,255,0.05);
+}
+.punchcard h4 {
+  font-size: 13px;
+  font-weight: 800;
+  color: #e3edf8;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* ── VECTOR PROBE STATION ──────────────────────────────────────────── */
+.probe-station {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.probe-input-row {
+  display: flex;
+  gap: 8px;
+}
+.probe-input {
+  flex: 1;
+  background: #090c0f;
+  border: 2px solid #364150;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--amber-hot);
+  outline: none;
+}
+.probe-input:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 10px var(--amber-glow);
+}
+.preset-tag {
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: #181d24;
+  border: 1px solid #354050;
+  color: #9cb0c7;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.preset-tag:hover {
+  background: #232a35;
+  color: var(--amber);
+  border-color: var(--amber-dim);
+}
+
+/* ── CHAOS / INCIDENT INJECTOR DRAWER ──────────────────────────────── */
+.inject-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px 14px;
+}
+
+/* ── MODAL / TACTICAL DOSSIER OVERLAY ──────────────────────────────── */
+.overlay {
+  position: fixed; inset: 0; background: rgba(6, 8, 10, 0.88);
+  backdrop-filter: blur(5px);
+  display: none; align-items: center; justify-content: center;
+  z-index: 100; padding: 20px;
+}
+.overlay.open { display: flex; }
+
+.dossier-frame {
+  width: min(1180px, 96vw);
+  max-height: 92vh;
+  background: #191d24;
+  border: 3px solid #4a5668;
+  border-radius: 8px;
+  box-shadow: 0 25px 80px rgba(0,0,0,0.9), inset 0 1px 0 rgba(255,255,255,0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.dossier-header {
+  padding: 12px 18px;
+  background: linear-gradient(180deg, #2a313c, #1f242d);
+  border-bottom: 2px solid #3e4858;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dossier-body {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+}
+@media (max-width: 900px) {
+  .dossier-body { grid-template-columns: 1fr; }
+}
+
+/* Authentic Dot-Matrix Perforated Invoice Slip */
+.dotmatrix-paper {
+  background: var(--paper-bg);
+  color: var(--paper-ink);
+  font-family: var(--font-display);
+  font-size: 11px;
+  line-height: 1.4;
+  padding: 22px 28px;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  border-left: 12px dotted #c4bea9;
+  border-right: 12px dotted #c4bea9;
+  overflow: hidden;
+}
+.dotmatrix-paper::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 24px, rgba(160, 200, 180, 0.12) 24px 48px);
+}
+.voucher-redline {
+  border: 2px dashed #d1232a;
+  background: rgba(220, 40, 50, 0.08);
+  padding: 6px;
+  border-radius: 4px;
+}
+
+/* Rubber Stamp Effect */
+.rubber-stamp {
+  position: absolute;
+  top: 35px; right: 35px;
+  font-family: var(--font-mono);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border: 4px double;
+  border-radius: 6px;
+  transform: rotate(-12deg) scale(1);
+  opacity: 0.88;
+  mask-image: radial-gradient(circle, black 60%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+.rubber-stamp.s-approved { color: #1e7039; border-color: #1e7039; }
+.rubber-stamp.s-adjust { color: #b36b00; border-color: #b36b00; }
+.rubber-stamp.s-escalate { color: #b81423; border-color: #b81423; font-size: 16px; }
+.rubber-stamp.s-reject { color: #850000; border-color: #850000; }
+.rubber-stamp.s-pending { color: #6b6659; border-color: #6b6659; }
+
+/* Physical Stamp Levers in Dossier */
+.stamp-deck {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px dashed #3a4554;
+}
+
+/* ── KLAXON EMERGENCY ALARM ANIMATION ─────────────────────────────── */
+@keyframes klaxon-flash {
+  0%, 100% { box-shadow: 0 0 0 rgba(255, 51, 68, 0); }
+  50% { box-shadow: 0 0 60px rgba(255, 51, 68, 0.7); border-color: #ff3344; }
+}
+.klaxon-active {
+  animation: klaxon-flash 0.8s ease-in-out 4;
+}
+
+/* ── FOOTER BAR ────────────────────────────────────────────────────── */
+.foot {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #637286;
+  text-transform: uppercase;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ═══════════════════ TOP MASTHEAD ═══════════════════ -->
+  <header class="chassis mast">
+    <div class="brand">
+      <div class="brand-mark">
+        <svg width="28" height="28" viewBox="0 0 44 44" fill="none">
+          <circle cx="22" cy="22" r="19" stroke="#ffaa1d" stroke-width="2.5" stroke-dasharray="5 3"/>
+          <path d="M22 6 L22 38 M6 22 L38 22" stroke="#485465" stroke-width="2"/>
+          <polygon points="22,10 32,32 22,27 12,32" fill="#19d2ff"/>
+          <circle cx="22" cy="22" r="3" fill="#ff3344"/>
+        </svg>
+      </div>
+      <div class="brand-text">
+        <h1>VALKYRIE <span style="color:var(--amber);font-size:16px;">// AP-77</span></h1>
+        <div class="brand-sub">Neural Accounts Payable Exception Command Matrix · MIL-SPEC 810G</div>
+      </div>
+    </div>
+
+    <div class="top-telemetry">
+      <div class="counter-bank" title="Total memory records loaded in vector vault">
+        <span style="font-size:9px;color:#7b889b;padding:4px;display:flex;align-items:center;">MEMORY VECTORS</span>
+        <div class="digit" id="dig-mem-1">0</div>
+        <div class="digit" id="dig-mem-2">0</div>
+        <div class="digit" id="dig-mem-3">0</div>
+      </div>
+
+      <div class="plate" id="station-plate">STATION: <span id="session-tag">— UNBOUND —</span></div>
+      
+      <div class="plate" id="audio-toggle" style="cursor:pointer;" title="Click or press 'M' to toggle mechanical audio">
+        <span class="lamp green" id="audio-lamp"></span> AUDIO: <span id="audio-label">ACTIVE</span>
+      </div>
+
+      <div class="plate hot">
+        <span class="lamp amber" id="engine-lamp"></span> ENGINE: <span id="engine-tag">POLLING</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══════════════════ TICKER BELT ═══════════════════ -->
+  <div class="ticker-chassis">
+    <div class="ticker-belt" id="ticker-belt">
+      ★ VALKYRIE // AP-77 SURVEILLANCE ONLINE ★ RECALL ENGINE ARMED WITH CHROMADB VECTOR VAULT ★ GROQ LLM PROTOCOL: QWEN-QWQ-32B & RULE ENGINE READY ★ AUDIT SUITE: SHIPPING TOLERANCES, RETAINER CAPS, TAX DISCREPANCIES MONITORED ★ PRESS [1] INGEST ★ [2] DETECT ★ [3] RESOLVE ALL ★ [4] REFLECT ★ [P] PROBE VECTOR VAULT ★
+    </div>
+  </div>
+
+  <!-- ═══════════════════ UPPER OPERATIONS DECK ═══════════════════ -->
+  <div class="grid">
+
+    <!-- INSTRUMENT GAUGES CLUSTER (COL 4) -->
+    <section class="chassis col-4" id="gauge-chassis">
+      <div class="hazard-strip"></div>
+      <div style="padding:10px 14px 4px; display:flex; justify-content:space-between; align-items:center;">
+        <span class="plate hot">GALVANOMETER CLUSTER</span>
+        <span class="plate" id="status-pill">STANDBY</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:6px 10px 12px;">
+        <!-- Gauge 1: Peak Variance -->
+        <div class="gauge-box">
+          <svg class="gauge-svg" width="130" height="96" viewBox="0 0 200 150">
+            <path d="M25 115 A75 75 0 0 1 175 115" fill="none" stroke="#252b34" stroke-width="16" stroke-linecap="round"/>
+            <path d="M25 115 A75 75 0 0 1 175 115" fill="none" stroke="url(#variance-grad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="235 235" id="arc-variance"/>
+            <!-- Danger warning zone -->
+            <path d="M140 50 A75 75 0 0 1 175 115" fill="none" stroke="#ff3344" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+            <defs>
+              <linearGradient id="variance-grad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#29e083"/>
+                <stop offset="50%" stop-color="#ffaa1d"/>
+                <stop offset="100%" stop-color="#ff3344"/>
+              </linearGradient>
+            </defs>
+            <g class="needle" id="needle-variance">
+              <path d="M100 96 L100 28" stroke="#f0f4f8" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="100" cy="96" r="9" fill="#f0f4f8"/>
+              <circle cx="100" cy="96" r="4" fill="#14181d"/>
+            </g>
+            <text x="100" y="132" text-anchor="middle" font-size="16" font-weight="900" fill="#ffaa1d" id="val-variance">$0</text>
+            <text x="100" y="146" text-anchor="middle" font-size="9" letter-spacing="1.5" fill="#6c7a8c">PEAK VARIANCE</text>
+          </svg>
+          <div class="gauge-glass"></div>
+        </div>
+
+        <!-- Gauge 2: Mean Confidence -->
+        <div class="gauge-box">
+          <svg class="gauge-svg" width="130" height="96" viewBox="0 0 200 150">
+            <path d="M25 115 A75 75 0 0 1 175 115" fill="none" stroke="#252b34" stroke-width="16" stroke-linecap="round"/>
+            <path d="M25 115 A75 75 0 0 1 175 115" fill="none" stroke="#29e083" stroke-width="14" stroke-linecap="round" stroke-dasharray="235 235" stroke-dashoffset="235" id="arc-confidence"/>
+            <g class="needle" id="needle-confidence">
+              <path d="M100 96 L100 28" stroke="#f0f4f8" stroke-width="4.5" stroke-linecap="round"/>
+              <circle cx="100" cy="96" r="9" fill="#f0f4f8"/>
+              <circle cx="100" cy="96" r="4" fill="#14181d"/>
+            </g>
+            <text x="100" y="132" text-anchor="middle" font-size="16" font-weight="900" fill="#29e083" id="val-confidence">0%</text>
+            <text x="100" y="146" text-anchor="middle" font-size="9" letter-spacing="1.5" fill="#6c7a8c">RESOLVER CONF</text>
+          </svg>
+          <div class="gauge-glass"></div>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div style="margin:0 12px 12px; background:#121519; border:1px solid #28303b; border-radius:4px; padding:8px 12px; display:flex; justify-content:space-between;">
+        <div>
+          <div style="font-size:9px; color:#68778a;">EXCEPTIONS HELD</div>
+          <div style="font-size:16px; font-weight:800; color:#e3edf8;" id="cnt-exceptions">0</div>
+        </div>
+        <div style="border-left:1px solid #28303b; padding-left:12px;">
+          <div style="font-size:9px; color:#68778a;">RESOLVED / ACTIVE</div>
+          <div style="font-size:16px; font-weight:800; color:var(--green);" id="cnt-resolved">0 / 0</div>
+        </div>
+        <div style="border-left:1px solid #28303b; padding-left:12px;">
+          <div style="font-size:9px; color:#68778a;">TOTAL VARIANCE</div>
+          <div style="font-size:16px; font-weight:800; color:var(--amber);" id="cnt-variance-sum">$0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRT TELETYPE LOG & COMMAND SWITCHBOARD (COL 8) -->
+    <section class="chassis col-8">
+      <div class="hazard-strip"></div>
+      <div style="padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span class="plate hot">OPERATIONAL COMMAND SWITCHBOARD</span>
+          <span class="plate" style="font-size:9px;">KEYS: [1] [2] [3] [4] [P]</span>
+        </div>
+        <div style="display:flex; gap:6px;">
+          <button class="rocker prime" id="btn-ingest" title="Retain all vendor contracts, emails, & approvals into memory">
+            <span>⏏</span> [1] Ingest
+          </button>
+          <button class="rocker" id="btn-scan" title="Scan active invoices for contractual discrepancies">
+            <span>⌕</span> [2] Detect
+          </button>
+          <button class="rocker special" id="btn-resolve" title="Invoke Groq/Rule resolver with Hindsight context">
+            <span>⚙</span> [3] Resolve All
+          </button>
+          <button class="rocker" id="btn-reflect" title="Synthesize vendor behavioral mental models">
+            <span>◉</span> [4] Reflect
+          </button>
+          <button class="rocker danger" id="btn-reset" title="Hard purge of session memory & reset board">
+            <span>☠</span> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- CRT Display -->
+      <div style="padding:0 14px 14px;">
+        <div class="crt-frame">
+          <div class="crt-screen" id="crt-log">
+            <div class="crt-line crt-dim">VALKYRIE // AP-77 KERNEL BOOT ROM v4.9.1</div>
+            <div class="crt-line crt-dim">SECURE AP HARDWARE INTERFACE · ALL CIRCUITS NOMINAL</div>
+            <div class="crt-line">&nbsp;</div>
+            <div class="crt-line">HINDSIGHT VECTOR STORAGE .... <span class="crt-ok">[ONLINE]</span></div>
+            <div class="crt-line">RULE EVALUATION ARRAY ....... <span class="crt-ok">[ENGAGED]</span></div>
+            <div class="crt-line">GROQ ACCELERATOR ............ <span class="crt-cyan" id="crt-engine-spec">[CONNECTING]</span></div>
+            <div class="crt-line">&nbsp;</div>
+            <div class="crt-line crt-hot">READY FOR OPERATOR COMMAND. SELECT ACTION [1-4] TO PROCEED. <span class="cursor">█</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════════════════ MIDDLE RADAR & PROBE HUD ═══════════════════ -->
+  <div class="grid" style="margin-top:16px;">
+
+    <!-- VECTOR MEMORY RADAR & SONAR (COL 4) -->
+    <section class="chassis col-4">
+      <div class="hazard-strip"></div>
+      <div style="padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+        <span class="plate active">CHROMA VECTOR SONAR</span>
+        <span class="plate" id="radar-stat">AWAITING RETAIN</span>
+      </div>
+
+      <div class="radar-container">
+        <div class="radar-bezel" id="radar-box">
+          <canvas id="radar-canvas" width="230" height="230"></canvas>
+        </div>
+
+        <div style="font-size:10px; color:#8fa0b5; width:100%; display:flex; justify-content:space-between; padding:0 8px;">
+          <span>🟢 APPROVAL RECORDS</span>
+          <span>🟡 CONTRACTS</span>
+          <span>🔴 DISPUTES</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- VECTOR PROBE & CHAOS INJECTOR STATION (COL 8) -->
+    <section class="chassis col-8">
+      <div class="hazard-strip"></div>
+      <div style="padding:10px 14px; display:flex; justify-content:space-between; align-items:center;">
+        <span class="plate hot">VECTOR VAULT PROBE & CHAOS INJECTOR</span>
+        <span class="plate">DIRECT RECALL TEST</span>
+      </div>
+
+      <div class="probe-station">
+        <div style="font-size:11px; color:#8fa0b5;">
+          Execute live semantic memory queries against the Hindsight memory bank:
+        </div>
+        <div class="probe-input-row">
+          <input type="text" class="probe-input" id="probe-input" placeholder="Type memory query (e.g. Dell shipping variance threshold, Acme retainer...)" />
+          <button class="rocker prime" id="btn-probe"><span>⚡</span> [P] PROBE</button>
+        </div>
+
+        <div style="display:flex; gap:6px; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:9.5px; color:#68778a;">QUICK PROBES:</span>
+          <span class="preset-tag" data-probe="Dell Technologies shipping terms and tolerance">Dell Freight Terms</span>
+          <span class="preset-tag" data-probe="Acme Consulting monthly retainer overage hours">Acme Retainer Overages</span>
+          <span class="preset-tag" data-probe="Pinnacle Security change order camera dispute">Pinnacle Disputed Charges</span>
+          <span class="preset-tag" data-probe="Staples Inc free shipping threshold and price tolerance">Staples Policy</span>
+        </div>
+
+        <!-- Chaos Injector Presets -->
+        <div style="margin-top:8px; border-top:1px dashed #2b3340; padding-top:10px;">
+          <div style="font-size:10.5px; font-weight:700; color:var(--crimson); letter-spacing:0.12em; margin-bottom:6px;">
+            ⚠️ INJECT TEST EXCEPTION INCIDENT (CHAOS ENGINE):
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            <button class="rocker" data-inject="DELL_AIR_FREIGHT" style="font-size:10px; padding:6px 12px;">
+              + Dell Air Express (+$1,420 Freight)
+            </button>
+            <button class="rocker" data-inject="STAPLES_SURPRISE" style="font-size:10px; padding:6px 12px;">
+              + Staples Freight Fee (+$85 Violation)
+            </button>
+            <button class="rocker" data-inject="ACME_UNAUTHORIZED" style="font-size:10px; padding:6px 12px;">
+              + Acme 32-Hr Retainer Breach (+$6,400)
+            </button>
+            <button class="rocker danger" data-inject="PINNACLE_DRONE" style="font-size:10px; padding:6px 12px;">
+              + Pinnacle Rogue Drone Patrol (+$4,500)
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- ═══════════════════ EXCEPTION SURVEILLANCE LEDGER ═══════════════════ -->
+  <section class="chassis col-12" style="margin-top:16px;">
+    <div class="hazard-strip"></div>
+    <div style="padding:12px 16px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="plate hot">EXCEPTION SURVEILLANCE LEDGER</span>
+        <span style="font-size:11px; color:#8fa0b5;">Click any line item to pull the physical invoice voucher & signoff</span>
+      </div>
+      <div style="display:flex; gap:6px; align-items:center;">
+        <span style="font-size:10px; color:#68778a;">FILTER:</span>
+        <button class="rocker" data-filter="all" style="padding:4px 10px; font-size:10px;">All</button>
+        <button class="rocker" data-filter="pending" style="padding:4px 10px; font-size:10px;">Pending</button>
+        <button class="rocker" data-filter="approved" style="padding:4px 10px; font-size:10px;">Approved</button>
+        <button class="rocker" data-filter="escalated" style="padding:4px 10px; font-size:10px;">Escalated</button>
+      </div>
+    </div>
+
+    <div class="ledger-wrap" id="ledger-container">
+      <!-- Dynamic Rows Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════ VENDOR DOSSIER CARD HOPPER ═══════════════════ -->
+  <section class="chassis col-12" style="margin-top:16px;">
+    <div class="hazard-strip"></div>
+    <div style="padding:12px 16px; display:flex; justify-content:space-between; align-items:center;">
+      <span class="plate">VENDOR RISK PROFILES & MENTAL MODELS</span>
+      <span class="plate active" id="vendor-count-tag">7 PROFILES ARMED</span>
+    </div>
+    <div class="card-grid" id="vendor-cards-grid">
+      <!-- Punch cards injected here -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="foot">
+    <div>VALKYRIE // AP-77 COMMAND CONSOLE · MERIDIAN DEFENSE FINANCIAL SYSTEMS · SEC-LEVEL 4</div>
+    <div>ENGINE CORE: <span id="foot-engine-spec" style="color:var(--amber);">INITIALIZING</span> · <span class="lamp green"></span> STREAM LIVE</div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════ TACTICAL DOSSIER & INVOICE VOUCHER MODAL ═══════════════════ -->
+<div class="overlay" id="dossier-overlay">
+  <div class="dossier-frame">
+    <div class="dossier-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="plate alert">TACTICAL AUDIT DOSSIER</span>
+        <span style="font-weight:700; color:#fff;" id="modal-dossier-id">INV-UNKNOWN</span>
+      </div>
+      <button class="rocker" id="btn-close-modal" style="padding:4px 12px; font-size:11px;">✕ CLOSE [ESC]</button>
+    </div>
+
+    <div class="dossier-body" id="modal-dossier-content">
+      <!-- Injected by showExceptionModal -->
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ═════════════════════════════════════════════════════════════════════════
+   VALKYRIE // AP-77 — OPERATIONAL FIRMWARE
+   Real-Time Audio Synthesizer, 2D Vector Radar, Dot-Matrix Renderer
+   ═════════════════════════════════════════════════════════════════════════ */
+
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+const STATE = {
+  settings: null,
+  exceptions: [],
+  resolutions: {},
+  busy: false,
+  session: null,
+  memory: 0,
+  filter: "all",
+  audioMuted: false,
+  activeDossierExc: null,
+};
+
+/* ── PROCEDURAL WEB AUDIO SYNTHESIZER (ZERO ASSET DEPENDENCIES) ─────── */
+class SoundEngine {
+  constructor() {
+    this.ctx = null;
+  }
+  _init() {
+    if (!this.ctx) {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if (AC) this.ctx = new AC();
+    }
+    if (this.ctx && this.ctx.state === "suspended") {
+      this.ctx.resume();
+    }
+  }
+
+  // Mechanical switch snap
+  click() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(320, t);
+    osc.frequency.exponentialRampToValueAtTime(80, t + 0.04);
+    gain.gain.setValueAtTime(0.08, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.04);
+    osc.connect(gain).connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.045);
+  }
+
+  // Heavy relay solenoid clunk
+  thud() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(140, t);
+    osc.frequency.exponentialRampToValueAtTime(35, t + 0.12);
+    gain.gain.setValueAtTime(0.2, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+    osc.connect(gain).connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.13);
+  }
+
+  // Teletype character print
+  tick() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = "square";
+    osc.frequency.setValueAtTime(800 + Math.random() * 400, t);
+    gain.gain.setValueAtTime(0.015, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 0.02);
+    osc.connect(gain).connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.025);
+  }
+
+  // Radar ping echo
+  sonarPing() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(1240, t);
+    osc.frequency.exponentialRampToValueAtTime(620, t + 0.3);
+    gain.gain.setValueAtTime(0.06, t);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.3);
+    osc.connect(gain).connect(this.ctx.destination);
+    osc.start(t);
+    osc.stop(t + 0.31);
+  }
+
+  // Hydraulic rubber stamp slam
+  stamp() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    // Impact thud
+    const osc1 = this.ctx.createOscillator();
+    const gain1 = this.ctx.createGain();
+    osc1.frequency.setValueAtTime(180, t);
+    osc1.frequency.exponentialRampToValueAtTime(30, t + 0.18);
+    gain1.gain.setValueAtTime(0.35, t);
+    gain1.gain.exponentialRampToValueAtTime(0.001, t + 0.18);
+    osc1.connect(gain1).connect(this.ctx.destination);
+    osc1.start(t);
+    osc1.stop(t + 0.19);
+  }
+
+  // Multi-tone Warbler Klaxon Siren
+  klaxon() {
+    if (STATE.audioMuted) return;
+    this._init();
+    if (!this.ctx) return;
+    const t = this.ctx.currentTime;
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = "sawtooth";
+    gain.gain.setValueAtTime(0.07, t);
+    osc.connect(gain).connect(this.ctx.destination);
+    for (let i = 0; i < 8; i++) {
+      osc.frequency.setValueAtTime(i % 2 === 0 ? 540 : 380, t + i * 0.12);
+    }
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 1.05);
+    osc.start(t);
+    osc.stop(t + 1.06);
+  }
+}
+const SOUNDS = new SoundEngine();
+
+/* Audio toggle */
+$("#audio-toggle").addEventListener("click", () => {
+  STATE.audioMuted = !STATE.audioMuted;
+  $("#audio-lamp").className = "lamp " + (STATE.audioMuted ? "red" : "green");
+  $("#audio-label").textContent = STATE.audioMuted ? "MUTED" : "ACTIVE";
+  SOUNDS.click();
+});
+
+/* ── CRT TELETYPE TERMINAL ENGINE ──────────────────────────────────── */
+let crtLineCount = 0;
+function logToCRT(text, styleClass = "") {
+  const box = $("#crt-log");
+  const row = document.createElement("div");
+  row.className = "crt-line" + (styleClass ? " " + styleClass : "");
+  row.textContent = text;
+  box.appendChild(row);
+  SOUNDS.tick();
+  if (++crtLineCount > 180) {
+    box.removeChild(box.firstChild);
+    crtLineCount--;
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+/* ── VECTOR RADAR CANVAS RENDERER ──────────────────────────────────── */
+class VectorRadar {
+  constructor(canvas) {
+    this.canvas = canvas;
+    this.ctx = canvas.getContext("2d");
+    this.angle = 0;
+    this.blips = [];
+    this.probeLine = null;
+    this._initBlips();
+    this.animate = this.animate.bind(this);
+    requestAnimationFrame(this.animate);
+  }
+
+  _initBlips() {
+    // Generate static blips mapped to synthetic precedents
+    this.blips = [
+      { r: 42, a: 0.8, color: "#29e083", id: "APR001", label: "Dell Shipping" },
+      { r: 68, a: 2.1, color: "#29e083", id: "APR006", label: "Staples Qty" },
+      { r: 84, a: 3.4, color: "#ffaa1d", id: "CTR-2024", label: "Dell Contract" },
+      { r: 55, a: 4.8, color: "#29e083", id: "APR008", label: "Acme Overrun" },
+      { r: 75, a: 1.3, color: "#ff3344", id: "APR012", label: "Pinnacle Rogue" },
+      { r: 92, a: 5.6, color: "#ff3344", id: "APR009", label: "Acme Disputed" },
+      { r: 35, a: 3.9, color: "#19d2ff", id: "NEG002", label: "Credit Memo" },
+      { r: 78, a: 0.3, color: "#ffaa1d", id: "CTR-009", label: "Acme Retainer" },
+    ];
+  }
+
+  setProbeTrace(angle, text) {
+    this.probeLine = { angle, text, time: Date.now() };
+    SOUNDS.sonarPing();
+  }
+
+  animate() {
+    const w = this.canvas.width;
+    const h = this.canvas.height;
+    const cx = w / 2;
+    const cy = h / 2;
+    const ctx = this.ctx;
+
+    // Soft decay trail
+    ctx.fillStyle = "rgba(8, 13, 9, 0.22)";
+    ctx.fillRect(0, 0, w, h);
+
+    // Concentric rings
+    ctx.strokeStyle = "rgba(41, 224, 131, 0.16)";
+    ctx.lineWidth = 1;
+    [30, 60, 90].forEach(r => {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r, 0, Math.PI * 2);
+      ctx.stroke();
+    });
+
+    // Crosshairs
+    ctx.beginPath();
+    ctx.moveTo(cx, 10); ctx.lineTo(cx, h - 10);
+    ctx.moveTo(10, cy); ctx.lineTo(w - 10, cy);
+    ctx.stroke();
+
+    // Rotating Sweep beam
+    this.angle = (this.angle + 0.024) % (Math.PI * 2);
+    const grad = ctx.createConicGradient(this.angle, cx, cy);
+    grad.addColorStop(0, "rgba(41, 224, 131, 0.45)");
+    grad.addColorStop(0.12, "rgba(41, 224, 131, 0.02)");
+    grad.addColorStop(1, "transparent");
+
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 100, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Draw blips
+    this.blips.forEach(b => {
+      const bx = cx + Math.cos(b.a) * b.r;
+      const by = cy + Math.sin(b.a) * b.r;
+      
+      // Calculate angular distance to sweep
+      let diff = (this.angle - b.a) % (Math.PI * 2);
+      if (diff < 0) diff += Math.PI * 2;
+      const alpha = diff < 0.4 ? 1 - (diff / 0.4) * 0.8 : 0.25;
+
+      ctx.fillStyle = b.color;
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.arc(bx, by, 3.5, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Halo
+      if (diff < 0.2) {
+        ctx.strokeStyle = b.color;
+        ctx.beginPath();
+        ctx.arc(bx, by, 7, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+    });
+    ctx.globalAlpha = 1.0;
+
+    // Laser probe trace line
+    if (this.probeLine) {
+      const elapsed = Date.now() - this.probeLine.time;
+      if (elapsed < 2400) {
+        const pAlpha = 1 - elapsed / 2400;
+        ctx.strokeStyle = `rgba(255, 170, 29, ${pAlpha})`;
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(this.probeLine.angle) * 105, cy + Math.sin(this.probeLine.angle) * 105);
+        ctx.stroke();
+      } else {
+        this.probeLine = null;
+      }
+    }
+
+    requestAnimationFrame(this.animate);
+  }
+}
+const RADAR = new VectorRadar($("#radar-canvas"));
+
+/* ── ANALOG GAUGES & COUNTERS FIRMWARE ──────────────────────────────── */
+function updateVarianceGauge(val) {
+  const needle = $("#needle-variance");
+  const label = $("#val-variance");
+  const frac = Math.min(1, Math.max(0, val / 6500));
+  const deg = -90 + frac * 180;
+  needle.style.transform = `rotate(${deg.toFixed(1)}deg)`;
+  label.textContent = "$" + Math.round(val).toLocaleString();
+  
+  if (val >= 3000) {
+    label.style.fill = "var(--crimson)";
+  } else if (val >= 500) {
+    label.style.fill = "var(--amber)";
+  } else {
+    label.style.fill = "var(--green)";
+  }
+}
+
+function updateConfidenceGauge(conf) {
+  const needle = $("#needle-confidence");
+  const arc = $("#arc-confidence");
+  const label = $("#val-confidence");
+  const frac = Math.min(1, Math.max(0, conf));
+  const deg = -90 + frac * 180;
+  needle.style.transform = `rotate(${deg.toFixed(1)}deg)`;
+  arc.style.strokeDashoffset = 235 - 235 * frac;
+  label.textContent = Math.round(frac * 100) + "%";
+}
+
+function updateFlipCounters(memCount) {
+  const s = String(memCount).padStart(3, "0");
+  $("#dig-mem-1").textContent = s[0];
+  $("#dig-mem-2").textContent = s[1];
+  $("#dig-mem-3").textContent = s[2];
+}
+
+/* ── MASTER API DRIVER ─────────────────────────────────────────────── */
+async function callAPI(endpoint, payload = null) {
+  const opts = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+  };
+  if (payload) opts.body = JSON.stringify(payload);
+  const res = await fetch(endpoint, opts);
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || `HTTP ${res.status}`);
+  return data;
+}
+
+async function fetchState() {
+  const res = await fetch("/state");
+  return res.json();
+}
+
+async function fetchSettings() {
+  const res = await fetch("/settings");
+  return res.json();
+}
+
+function setBusy(busy) {
+  STATE.busy = busy;
+  $("#status-pill").textContent = busy ? "PROCESSING" : "READY";
+  $("#status-pill").className = "plate " + (busy ? "alert" : "active");
+  ["btn-ingest", "btn-scan", "btn-resolve", "btn-reflect", "btn-reset", "btn-probe"].forEach(id => {
+    const el = $("#" + id);
+    if (el) el.disabled = busy;
+  });
+}
+
+async function withGuard(actionName, fn) {
+  if (STATE.busy) return;
+  setBusy(true);
+  SOUNDS.click();
+  try {
+    await fn();
+  } catch (err) {
+    logToCRT(`!! ERROR [${actionName}]: ${err.message}`, "crt-bad");
+    SOUNDS.thud();
+  } finally {
+    setBusy(false);
+    await syncState();
+  }
+}
+
+/* ── RENDERING ENGINES ─────────────────────────────────────────────── */
+function renderStats() {
+  const ex = STATE.exceptions || [];
+  const resolved = ex.filter(e => e.resolution);
+  
+  $("#cnt-exceptions").textContent = ex.length;
+  $("#cnt-resolved").textContent = `${resolved.length} / ${ex.length}`;
+  
+  const peak = ex.length ? Math.max(...ex.map(e => e.variance || 0)) : 0;
+  const sum = ex.reduce((acc, e) => acc + (e.variance || 0), 0);
+  $("#cnt-variance-sum").textContent = "$" + Math.round(sum).toLocaleString();
+
+  updateVarianceGauge(peak);
+
+  const confs = resolved.map(e => e.resolution.confidence || 0);
+  const meanConf = confs.length ? confs.reduce((a, b) => a + b, 0) / confs.length : 0;
+  updateConfidenceGauge(meanConf);
+
+  updateFlipCounters(STATE.memory);
+}
+
+function renderLedger() {
+  const box = $("#ledger-container");
+  let rows = STATE.exceptions || [];
+
+  if (STATE.filter === "pending") rows = rows.filter(e => !e.resolution);
+  if (STATE.filter === "approved") rows = rows.filter(e => e.resolution && ["auto_approved", "approved_with_adjustment"].includes(e.resolution.action));
+  if (STATE.filter === "escalated") rows = rows.filter(e => e.resolution && ["escalated_to_human", "rejected"].includes(e.resolution.action));
+
+  if (!rows.length) {
+    box.innerHTML = `
+      <div style="padding:32px; text-align:center; color:#5c697b; font-size:12px; letter-spacing:0.18em;">
+        ${STATE.exceptions.length ? "NO EXCEPTIONS MATCH CURRENT FILTER" : "SURVEILLANCE LEDGER EMPTY · PRESS [2] TO SCAN ACTIVE INVOICES"}
+      </div>`;
+    return;
+  }
+
+  box.innerHTML = rows.map(e => {
+    const r = e.resolution;
+    const sev = e.variance >= 3000 ? "sev-high" : e.variance >= 500 ? "sev-med" : "sev-low";
+    
+    let pillHtml = `<span class="pill p-pending">PENDING</span>`;
+    let lampColor = "amber";
+    if (r) {
+      if (r.action === "auto_approved") {
+        pillHtml = `<span class="pill p-approved">AUTO APPROVED · ${(r.confidence*100).toFixed(0)}%</span>`;
+        lampColor = "green";
+      } else if (r.action === "approved_with_adjustment") {
+        pillHtml = `<span class="pill p-adjust">ADJUSTED · ${(r.confidence*100).toFixed(0)}%</span>`;
+        lampColor = "amber";
+      } else if (r.action === "escalated_to_human") {
+        pillHtml = `<span class="pill p-escalate">ESCALATED · ${(r.confidence*100).toFixed(0)}%</span>`;
+        lampColor = "red";
+      } else if (r.action === "rejected") {
+        pillHtml = `<span class="pill p-reject">REJECTED · ${(r.confidence*100).toFixed(0)}%</span>`;
+        lampColor = "red";
+      }
+    }
+
+    return `
+      <div class="ledger-row ${sev}" data-exc-id="${e.exception_id}">
+        <div><span class="lamp ${lampColor}"></span></div>
+        <div style="font-weight:700; color:#e3edf8; font-size:11px;">${e.invoice_id}</div>
+        <div style="font-size:11.5px; color:#d2dce8; font-weight:700;">${e.vendor_name}</div>
+        <div style="font-size:11px; color:#9cb0c7; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">
+          <span style="color:#ffaa1d; font-weight:700;">[${e.label}]</span> ${e.description}
+        </div>
+        <div style="font-size:13px; font-weight:800; color:#fff; text-align:right;">
+          +$${e.variance.toLocaleString(undefined, {minimumFractionDigits: 2})}
+        </div>
+        <div style="text-align:center;">${pillHtml}</div>
+        <div style="display:flex; gap:6px; justify-content:flex-end;">
+          ${!r ? `<button class="rocker prime btn-solve-single" data-solve="${e.exception_id}" style="padding:3px 8px; font-size:9.5px;">SOLVE</button>` : ""}
+          <button class="rocker btn-inspect" data-inspect="${e.exception_id}" style="padding:3px 8px; font-size:9.5px;">AUDIT</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  // Attach inspection handlers
+  $$(".ledger-row").forEach(el => {
+    el.addEventListener("click", ev => {
+      if (ev.target.closest(".btn-solve-single")) return;
+      showExceptionModal(el.dataset.excId);
+    });
+  });
+
+  $$(".btn-solve-single").forEach(b => {
+    b.addEventListener("click", ev => {
+      ev.stopPropagation();
+      solveSingleException(b.dataset.solve);
+    });
+  });
+}
+
+function renderVendorCards() {
+  const grid = $("#vendor-cards-grid");
+  const vendors = (STATE.settings && STATE.settings.vendors) || [];
+  grid.innerHTML = vendors.map(v => {
+    const tierLamp = v.tier === "high" ? "red" : v.tier === "medium" ? "amber" : "green";
+    return `
+      <div class="punchcard">
+        <div class="holes">
+          <div class="hole"></div><div class="hole"></div><div class="hole"></div>
+          <div style="width:12px"></div>
+          <div class="hole"></div><div class="hole"></div>
+        </div>
+        <h4>
+          <span>${v.name}</span>
+          <span class="lamp ${tierLamp}"></span>
+        </h4>
+        <div style="font-size:10px; color:#78889c; text-transform:uppercase; margin-bottom:6px;">
+          ${v.id} · ${v.category} · ${v.terms}
+        </div>
+        <div style="font-size:11px; color:#b2c0d2; font-style:italic;">
+          "${v.notes || "No historical notes recorded."}"
+        </div>
+      </div>
+    `;
+  }).join("");
+  $("#vendor-count-tag").textContent = `${vendors.length} PROFILES ARMED`;
+}
+
+/* ── MODAL: TACTICAL DOSSIER & DOT-MATRIX INVOICE VOUCHER ─────────── */
+function showExceptionModal(excId) {
+  const e = STATE.exceptions.find(x => x.exception_id === excId);
+  if (!e) return;
+  STATE.activeDossierExc = e;
+  SOUNDS.click();
+
+  const r = e.resolution;
+  $("#modal-dossier-id").textContent = `${e.invoice_id} // EXCEPTION ${e.exception_id}`;
+
+  let stampClass = "s-pending";
+  let stampText = "PENDING REVIEW";
+  if (r) {
+    if (r.action === "auto_approved") { stampClass = "s-approved"; stampText = "AUTO APPROVED"; }
+    else if (r.action === "approved_with_adjustment") { stampClass = "s-adjust"; stampText = "APPROVED W/ ADJUSTMENT"; }
+    else if (r.action === "escalated_to_human") { stampClass = "s-escalate"; stampText = "ESCALATED TO HUMAN"; }
+    else if (r.action === "rejected") { stampClass = "s-reject"; stampText = "REJECTED & DISPUTED"; }
+  }
+
+  const lineItemsRows = (e.line_items || []).map(li => `
+    <tr>
+      <td style="padding:4px 0;">${li.description}</td>
+      <td style="text-align:center;">${li.quantity}</td>
+      <td style="text-align:right;">$${Number(li.unit_price).toFixed(2)}</td>
+      <td style="text-align:right;font-weight:bold;">$${Number(li.total).toFixed(2)}</td>
+    </tr>
+  `).join("");
+
+  const contractNotes = e.contract ? `
+    <div style="margin-top:10px; padding:10px; background:#12161b; border:1px solid #2e3846; border-radius:4px; font-size:11px;">
+      <div style="color:var(--amber); font-weight:700; font-size:10.5px;">VENDOR CONTRACT // ${e.contract.contract_id || "CTR-ACTIVE"}</div>
+      <div style="margin-top:4px; color:#c5d2e2;"><strong>Shipping:</strong> ${e.contract.shipping_terms || "N/A"}</div>
+      <div style="margin-top:2px; color:#c5d2e2;"><strong>Pricing:</strong> ${e.contract.price_protection || "N/A"}</div>
+      <div style="margin-top:2px; color:#8ea0b5;"><strong>Notes:</strong> ${e.contract.notes || "None"}</div>
+    </div>
+  ` : `<div style="color:#78889c; font-size:11px;">No formal contract on file. Default AP risk tier applies.</div>`;
+
+  const recallEvidence = (r && r.recall && r.recall.length) ? r.recall.map(rec => `
+    <div style="margin-top:6px; padding:8px; background:#0c1014; border-left:3px solid var(--green); border-radius:3px; font-size:10.5px;">
+      <div style="display:flex; justify-content:space-between; color:var(--green); font-weight:700;">
+        <span>${rec.type.toUpperCase()} · ${rec.id}</span>
+        <span>Δ SIMILARITY ${rec.score}</span>
+      </div>
+      <div style="color:#a6b8cc; margin-top:3px; font-family:var(--font-mono);">${rec.text}</div>
+    </div>
+  `).join("") : `<div style="color:#68778a; font-size:11px; margin-top:4px;">No precedents retrieved or pending resolution.</div>`;
+
+  $("#modal-dossier-content").innerHTML = `
+    <!-- LEFT PANE: DOT-MATRIX VOUCHER -->
+    <div>
+      <div class="dotmatrix-paper">
+        <div class="rubber-stamp ${stampClass}" id="dossier-rubber-stamp">${stampText}</div>
+        
+        <div style="display:flex; justify-content:space-between; border-bottom:1px dashed #78705a; padding-bottom:8px; margin-bottom:10px;">
+          <div>
+            <div style="font-size:14px; font-weight:900;">COMMERCIAL INVOICE VOUCHER</div>
+            <div style="font-size:10px; color:#5c5647;">AP RECORD: ${e.invoice_id} · PO REF: ${e.po_number || "NONE"}</div>
+          </div>
+          <div style="text-align:right;">
+            <div>DATE: ${e.invoice_date || "2025-09-30"}</div>
+            <div>TERMS: ${e.vendor_terms || "NET-30"}</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:12px;">
+          <strong>VENDOR:</strong> ${e.vendor_name}<br>
+          <strong>TIER:</strong> ${(e.vendor_tier || "LOW").toUpperCase()} RISK
+        </div>
+
+        <table style="width:100%; border-collapse:collapse; margin-bottom:12px;">
+          <thead>
+            <tr style="border-bottom:1px solid #78705a; text-align:left; font-size:10px;">
+              <th>DESCRIPTION</th>
+              <th style="text-align:center;">QTY</th>
+              <th style="text-align:right;">PRICE</th>
+              <th style="text-align:right;">TOTAL</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${lineItemsRows}
+          </tbody>
+        </table>
+
+        <!-- Detected Variance Annotation Box -->
+        <div class="voucher-redline">
+          <div style="color:#b81423; font-weight:900; font-size:11px;">⚠️ AUDIT EXCEPTION: ${e.label}</div>
+          <div style="margin-top:2px;">${e.description}</div>
+          <div style="margin-top:3px; font-weight:700;">VARIANCE EXPOSURE: +$${e.variance.toFixed(2)}</div>
+        </div>
+
+        <div style="margin-top:14px; text-align:right; border-top:1px dashed #78705a; padding-top:8px;">
+          <div>SUBTOTAL: $${Number(e.subtotal || e.invoice_total - e.shipping).toFixed(2)}</div>
+          <div>SHIPPING CHARGE: $${Number(e.shipping || 0).toFixed(2)}</div>
+          <div>TAX: $${Number(e.tax || 0).toFixed(2)}</div>
+          <div style="font-size:14px; font-weight:900; margin-top:4px;">TOTAL: $${Number(e.invoice_total).toFixed(2)}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT PANE: CONTRACT & AGENT RESOLUTION & OVERRIDE STAMPS -->
+    <div style="display:flex; flex-direction:column; justify-content:space-between;">
+      <div>
+        <span class="plate hot">POLICY RULES & MEMORY CONTEXT</span>
+        ${contractNotes}
+
+        <div style="margin-top:14px;">
+          <span class="plate active">AGENT DECISION & REASONING</span>
+          <div style="margin-top:6px; padding:10px; background:#101418; border:1px solid #283340; border-radius:4px; font-size:11.5px; color:#d6e2f0;">
+            ${r ? `
+              <div><strong>DECISION:</strong> <span style="color:var(--amber);">${r.action.toUpperCase()}</span></div>
+              <div style="margin-top:4px;"><strong>CONFIDENCE:</strong> ${(r.confidence*100).toFixed(0)}% via ${r.engine.toUpperCase()}</div>
+              <div style="margin-top:6px; color:#a3b5c9;">"${r.reasoning}"</div>
+              <div style="margin-top:4px; font-size:10px; color:#68778a;">Signoff: ${r.approved_by || "Agent"}</div>
+            ` : "Resolution pending. Run [3] RESOLVE ALL or select a human override stamp below."}
+          </div>
+        </div>
+
+        <div style="margin-top:14px;">
+          <span class="plate">RECALLED PRECEDENTS (${r ? r.similar_cases_found : 0} FOUND)</span>
+          ${recallEvidence}
+        </div>
+      </div>
+
+      <!-- HUMAN OVERRIDE STAMP DESK -->
+      <div>
+        <div style="font-size:10.5px; font-weight:800; color:var(--amber); letter-spacing:0.14em; margin-bottom:4px;">
+          HUMAN SIGN-OFF & OVERRIDE DESK:
+        </div>
+        <div class="stamp-deck">
+          <button class="rocker special" onclick="executeOverride('auto_approved')">✔ APPROVE</button>
+          <button class="rocker" onclick="executeOverride('approved_with_adjustment')">± ADJUST</button>
+          <button class="rocker" onclick="executeOverride('escalated_to_human')">⚠ ESCALATE</button>
+          <button class="rocker danger" onclick="executeOverride('rejected')">✕ REJECT</button>
+        </div>
+      </div>
+    </div>
+  `;
+
+  $("#dossier-overlay").classList.add("open");
+}
+
+/* Close modal */
+$("#btn-close-modal").addEventListener("click", () => {
+  $("#dossier-overlay").classList.remove("open");
+  SOUNDS.click();
+});
+$("#dossier-overlay").addEventListener("click", ev => {
+  if (ev.target.id === "dossier-overlay") {
+    $("#dossier-overlay").classList.remove("open");
+    SOUNDS.click();
+  }
+});
+window.addEventListener("keydown", ev => {
+  if (ev.key === "Escape") {
+    $("#dossier-overlay").classList.remove("open");
+  } else if (ev.key === "1") {
+    $("#btn-ingest").click();
+  } else if (ev.key === "2") {
+    $("#btn-scan").click();
+  } else if (ev.key === "3") {
+    $("#btn-resolve").click();
+  } else if (ev.key === "4") {
+    $("#btn-reflect").click();
+  } else if (ev.key === "p" || ev.key === "P") {
+    if (document.activeElement.tagName !== "INPUT") {
+      ev.preventDefault();
+      $("#probe-input").focus();
+    }
+  } else if (ev.key === "m" || ev.key === "M") {
+    if (document.activeElement.tagName !== "INPUT") {
+      $("#audio-toggle").click();
+    }
+  }
+});
+
+/* ── HUMAN OVERRIDE EXECUTION ──────────────────────────────────────── */
+window.executeOverride = async function(action) {
+  if (!STATE.activeDossierExc) return;
+  const excId = STATE.activeDossierExc.exception_id;
+  SOUNDS.stamp();
+
+  const stampEl = $("#dossier-rubber-stamp");
+  if (stampEl) {
+    stampEl.style.transform = "rotate(-12deg) scale(1.3)";
+    setTimeout(() => stampEl.style.transform = "rotate(-12deg) scale(1)", 150);
+  }
+
+  logToCRT(`> HUMAN OPERATOR OVERRIDE: ${excId} → ${action.toUpperCase()}`, "crt-hot");
+  try {
+    const res = await callAPI("/override", {
+      exception_id: excId,
+      action: action,
+      approver: "Senior AP Controller",
+      reasoning: `Manual override authorized by AP Controller on ${new Date().toLocaleTimeString()}`,
+    });
+    logToCRT(`  Override logged and confirmed in audit ledger.`, "crt-ok");
+    await syncState();
+    showExceptionModal(excId);
+  } catch (err) {
+    logToCRT(`!! Override failure: ${err.message}`, "crt-bad");
+  }
+};
+
+/* ── SINGLE EXCEPTION RESOLVER ─────────────────────────────────────── */
+async function solveSingleException(excId) {
+  withGuard("SOLVE_SINGLE", async () => {
+    logToCRT(`> ENGAGING RESOLVER FOR EXCEPTION ${excId}...`, "crt-hot");
+    const r = await callAPI("/resolve_one", { exception_id: excId });
+    if (r.resolution) {
+      logToCRT(`  Resolved: ${r.resolution.action.toUpperCase()} (${(r.resolution.confidence*100).toFixed(0)}%)`, "crt-ok");
+      if (["escalated_to_human", "rejected"].includes(r.resolution.action)) {
+        triggerKlaxon();
+      }
+    }
+  });
+}
+
+/* ── KLAXON TRIGGER ────────────────────────────────────────────────── */
+function triggerKlaxon() {
+  SOUNDS.klaxon();
+  document.body.classList.add("klaxon-active");
+  setTimeout(() => document.body.classList.remove("klaxon-active"), 3500);
+}
+
+/* ── HARDWARE BUTTON ACTIONS ───────────────────────────────────────── */
+$("#btn-ingest").addEventListener("click", () => withGuard("INGEST", async () => {
+  logToCRT("> CMD: INGEST ARCHIVE (HINDSIGHT retain)");
+  const res = await callAPI("/ingest");
+  logToCRT(`  Memory Bank armed: ${res.memory_count} documents retained into ${res.backend}`, "crt-ok");
+  STATE.memory = res.memory_count;
+  STATE.session = res.session_id;
+  $("#radar-stat").textContent = "SWEEP ACTIVE";
+  SOUNDS.sonarPing();
+}));
+
+$("#btn-scan").addEventListener("click", () => withGuard("SCAN", async () => {
+  logToCRT("> CMD: SCAN INVOICES (RULE-BASED EXCEPTION DETECTOR)");
+  const res = await callAPI("/scan");
+  logToCRT(`  Scanner Array returned ${res.exceptions.length} exceptions across active ledger`, "crt-ok");
+  res.exceptions.forEach(e => {
+    logToCRT(`    • [${e.invoice_id}] ${e.vendor_name} — ${e.label} (+$${e.variance.toFixed(2)})`, "crt-dim");
+  });
+}));
+
+$("#btn-resolve").addEventListener("click", () => withGuard("RESOLVE_ALL", async () => {
+  logToCRT("> CMD: RESOLVE ALL (GROQ LLM / RULE RECALL ENGINE)", "crt-hot");
+  const pending = STATE.exceptions.filter(e => !e.resolution);
+  if (!pending.length) {
+    logToCRT("  Notice: No pending exceptions in ledger. Run Detect [2] first.", "crt-dim");
+    return;
+  }
+  const res = await callAPI("/resolve_all");
+  const ex = (res.state && res.state.exceptions) || [];
+  let escalatedCount = 0;
+  ex.forEach(e => {
+    if (!e.resolution) return;
+    const action = e.resolution.action;
+    const conf = (e.resolution.confidence * 100).toFixed(0);
+    const tag = action.replace(/_/g, " ").toUpperCase();
+    if (action === "auto_approved") {
+      logToCRT(`    ✓ ${e.exception_id} -> ${tag} @ ${conf}% (${e.vendor_name})`, "crt-ok");
+    } else if (action === "approved_with_adjustment") {
+      logToCRT(`    ± ${e.exception_id} -> ${tag} @ ${conf}% (${e.vendor_name})`, "crt-hot");
+    } else {
+      logToCRT(`    ⚠️ ${e.exception_id} -> ${tag} @ ${conf}% (${e.vendor_name})`, "crt-bad");
+      escalatedCount++;
+    }
+  });
+
+  if (escalatedCount > 0) {
+    logToCRT(`  ALERT: ${escalatedCount} EXCEPTION(S) FLAGGED FOR HUMAN ESCALATION!`, "crt-bad");
+    triggerKlaxon();
+  } else {
+    logToCRT("  All exceptions resolved within auto-approval boundaries.", "crt-ok");
+  }
+}));
+
+$("#btn-reflect").addEventListener("click", () => withGuard("REFLECT", async () => {
+  logToCRT("> CMD: REFLECT PROFILES (HINDSIGHT reflect)");
+  const res = await callAPI("/reflect");
+  logToCRT(`  Reflect synthesized vendor mental models for ${res.profiles.length} suppliers`, "crt-ok");
+  res.profiles.forEach(p => {
+    logToCRT(`    • ${p.name} [Tier: ${p.tier.toUpperCase()}] ${p.notes.slice(0, 60)}...`, "crt-dim");
+  });
+}));
+
+$("#btn-reset").addEventListener("click", () => withGuard("RESET", async () => {
+  logToCRT("> CMD: HARD PURGE BOARD STATE", "crt-bad");
+  await callAPI("/reset");
+  logToCRT("  State cleared. Counters zeroed.", "crt-ok");
+}));
+
+/* Vector Probe execution */
+async function runProbe(query) {
+  if (!query) return;
+  withGuard("PROBE", async () => {
+    logToCRT(`> FIRING VECTOR PROBE: "${query}"`, "crt-hot");
+    const angle = Math.random() * Math.PI * 2;
+    RADAR.setProbeTrace(angle, query);
+    const res = await callAPI("/probe", { query, n_results: 4 });
+    if (res.hits && res.hits.length) {
+      logToCRT(`  Top Recall Precedent: ${res.hits[0].id} (Score Δ ${res.hits[0].score})`, "crt-ok");
+      logToCRT(`  "${res.hits[0].text.slice(0, 140)}..."`, "crt-cyan");
+    } else {
+      logToCRT("  No vector correlation found above threshold.", "crt-dim");
+    }
+  });
+}
+
+$("#btn-probe").addEventListener("click", () => {
+  runProbe($("#probe-input").value.trim());
+});
+$("#probe-input").addEventListener("keydown", ev => {
+  if (ev.key === "Enter") runProbe($("#probe-input").value.trim());
+});
+$$("[data-probe]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    $("#probe-input").value = btn.dataset.probe;
+    runProbe(btn.dataset.probe);
+  });
+});
+
+/* Chaos Injector */
+$$("[data-inject]").forEach(btn => {
+  btn.addEventListener("click", () => withGuard("INJECT", async () => {
+    const preset = btn.dataset.inject;
+    logToCRT(`> INJECTING INCIDENT: ${preset}`, "crt-bad");
+    const res = await callAPI("/inject", { preset });
+    logToCRT(`  Injected ${res.invoice_id} with ${res.exceptions.length} discrepancy items!`, "crt-hot");
+    triggerKlaxon();
+  }));
+});
+
+/* Filter buttons */
+$$("[data-filter]").forEach(btn => {
+  btn.addEventListener("click", () => {
+    STATE.filter = btn.dataset.filter;
+    SOUNDS.click();
+    $$("[data-filter]").forEach(b => b.classList.remove("prime"));
+    btn.classList.add("prime");
+    renderLedger();
+  });
+});
+
+/* ── STATE SYNCHRONIZATION ─────────────────────────────────────────── */
+async function syncState() {
+  try {
+    const s = await fetchState();
+    STATE.session = s.session_id;
+    STATE.memory = s.memory_count || 0;
+    STATE.exceptions = s.exceptions || [];
+    STATE.resolutions = s.resolutions || {};
+    
+    $("#session-tag").textContent = s.session_id || "— UNBOUND —";
+    renderStats();
+    renderLedger();
+  } catch (err) {
+    console.error("State sync failed:", err);
+  }
+}
+
+/* ── SYSTEM BOOT SEQUENCE ──────────────────────────────────────────── */
+(async function boot() {
+  try {
+    const settings = await fetchSettings();
+    STATE.settings = settings;
+    const modelTag = settings.groq ? `GROQ // ${settings.model}` : "RULE-77 ENGINE (LOCAL FALLBACK)";
+    $("#engine-tag").textContent = settings.groq ? "ONLINE" : "FALLBACK";
+    $("#foot-engine-spec").textContent = modelTag;
+    $("#crt-engine-spec").textContent = `[${modelTag}]`;
+    $("#engine-lamp").className = "lamp " + (settings.groq ? "green" : "amber");
+    
+    renderVendorCards();
+  } catch (err) {
+    logToCRT("!! Failed to connect to backend settings. Bridge offline?", "crt-bad");
+  }
+
+  await syncState();
+  logToCRT("SYSTEM ARMED. MATRIX READY.", "crt-ok");
+})();
+</script>
+</body>
+</html>
+
